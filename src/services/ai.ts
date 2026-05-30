@@ -105,13 +105,20 @@ Ví dụ ngữ cảnh:
   Trả về: { "reply": "Cố gắng lên nào! Một chút giai điệu lofi không lời tươi tắn sẽ giúp bạn tỉnh táo và khôi phục năng lượng tập trung ngay lập tức đấy.", "searchQuery": "lofi study upbeat focus no vocals", "extractedMoods": ["study", "focus", "tập trung"] }`
     });
 
-    // Format chat history for Gemini API content structure
-    const historyPrompts = chatHistory.slice(-6).map((msg) => {
-      return {
-        role: msg.role === 'user' ? 'user' : 'model',
-        parts: [{ text: msg.content }]
-      };
-    });
+    // Format chat history for Gemini API content structure (guarantee starts with 'user' and alternates)
+    const historyPrompts: any[] = [];
+    let expectedRole = 'user';
+
+    for (const msg of chatHistory.slice(-8)) {
+      const role = msg.role === 'user' ? 'user' : 'model';
+      if (role === expectedRole) {
+        historyPrompts.push({
+          role: role,
+          parts: [{ text: msg.content }]
+        });
+        expectedRole = role === 'user' ? 'model' : 'user';
+      }
+    }
 
     // Add current user message
     const chat = model.startChat({
