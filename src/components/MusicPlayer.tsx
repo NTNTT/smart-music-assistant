@@ -57,9 +57,12 @@ export const MusicPlayer: React.FC = () => {
       {/* Left section: Song Details */}
       <div className="flex items-center gap-3 w-1/4 min-w-[200px]">
         <img
-          src={currentSong.coverUrl}
+          src={currentSong.coverUrl || `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect width="80" height="80" fill="%2318181b" rx="12"/><g transform="translate(20, 20) scale(1.6)" fill="none" stroke="%2306b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></g></svg>`}
           alt={currentSong.title}
           className="w-14 h-14 rounded-xl object-cover border border-zinc-800/80 shadow-md flex-shrink-0"
+          onError={(e) => {
+            e.currentTarget.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect width="80" height="80" fill="%2318181b" rx="12"/><g transform="translate(20, 20) scale(1.6)" fill="none" stroke="%2306b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></g></svg>`;
+          }}
         />
         <div className="min-w-0 flex-1">
           <span className="block text-sm font-semibold text-white truncate">

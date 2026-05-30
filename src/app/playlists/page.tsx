@@ -233,10 +233,13 @@ function PlaylistsContent() {
                       {/* Song Details Title/Artist */}
                       <div className="col-span-11 sm:col-span-6 md:col-span-7 flex items-center gap-3.5 min-w-0">
                         <img
-                          src={song.coverUrl}
+                          src={song.coverUrl || `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect width="80" height="80" fill="%2318181b" rx="12"/><g transform="translate(20, 20) scale(1.6)" fill="none" stroke="%2306b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></g></svg>`}
                           alt={song.title}
                           className="w-9 h-9 rounded-lg object-cover border border-zinc-800 flex-shrink-0"
                           loading="lazy"
+                          onError={(e) => {
+                            e.currentTarget.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect width="80" height="80" fill="%2318181b" rx="12"/><g transform="translate(20, 20) scale(1.6)" fill="none" stroke="%2306b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></g></svg>`;
+                          }}
                         />
                         <div className="min-w-0">
                           <span className={`block font-semibold truncate ${isCurrent ? 'text-cyan-400' : 'text-white'}`}>

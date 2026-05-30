@@ -168,9 +168,12 @@ export default function AnalyticsPage() {
                   <div key={index} className="flex items-center justify-between p-3 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-zinc-800/10">
                     <div className="flex items-center gap-3.5 min-w-0">
                       <img
-                        src={stat.coverUrl}
+                        src={stat.coverUrl || `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect width="80" height="80" fill="%2318181b" rx="12"/><g transform="translate(20, 20) scale(1.6)" fill="none" stroke="%2306b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></g></svg>`}
                         alt={stat.title}
                         className="w-10 h-10 rounded-xl object-cover border border-zinc-800 flex-shrink-0"
+                        onError={(e) => {
+                          e.currentTarget.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect width="80" height="80" fill="%2318181b" rx="12"/><g transform="translate(20, 20) scale(1.6)" fill="none" stroke="%2306b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></g></svg>`;
+                        }}
                       />
                       <div className="min-w-0">
                         <span className="block font-bold text-white text-xs truncate">{stat.title}</span>
